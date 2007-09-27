@@ -1,6 +1,6 @@
 %define name	t1lib
 %define version	5.1.1
-%define release %mkrel 1
+%define release %mkrel 2
 %define lib_major 5
 %define lib_name %mklibname %{name} %{lib_major}
 
@@ -12,6 +12,8 @@ URL:		ftp://sunsite.unc.edu/pub/Linux/libs/graphics/
 Source:		ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.bz2
 Patch1:		%{name}-doc.patch
 Patch2:         %{name}-config.patch
+# http://qa.mandriva.com/show_bug.cgi?id=34223
+Patch3:         t1lib-5.1.0-ub-CVE-2007-4033.patch
 Group:		System/Libraries
 BuildRequires:	XFree86-devel xpm-devel
 BuildRequires:  tetex
@@ -93,6 +95,7 @@ The t1lib-config contains configuration files for t1lib library
 %setup -q
 %patch1 -p0
 %patch2 -p0
+%patch3 -p1 -b .CVE-2007-4033
 
 %build
 %configure2_5x
