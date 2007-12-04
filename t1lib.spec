@@ -15,7 +15,7 @@ Patch2:         %{name}-config.patch
 # http://qa.mandriva.com/show_bug.cgi?id=34223
 Patch3:         t1lib-5.1.0-ub-CVE-2007-4033.patch
 Group:		System/Libraries
-BuildRequires:	XFree86-devel xpm-devel
+BuildRequires:	X11-devel xpm-devel
 BuildRequires:  tetex
 BuildRequires:  tetex-latex
 License:	LGPL
