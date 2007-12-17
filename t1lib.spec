@@ -19,7 +19,6 @@ BuildRequires:	X11-devel xpm-devel
 BuildRequires:  tetex
 BuildRequires:  tetex-latex
 License:	LGPL
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%(id -u -n)
 Epoch: 		1
 
 %description
