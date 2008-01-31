@@ -1,7 +1,7 @@
 %define name	t1lib
 %define version	5.1.2
-%define release %mkrel 1
-%define lib_major 1
+%define release %mkrel 2
+%define lib_major 5
 %define lib_name %mklibname %{name} %{lib_major}
 
 Summary:	Type 1 font rasterizer
@@ -130,7 +130,7 @@ rm -rf %buildroot
 %defattr(-,root,root)
 %dir %{_sysconfdir}/t1lib
 %doc Changes LGPL README.t1*
-%attr(755,root,root) %{_libdir}/libt1*.so.*
+%attr(755,root,root) %{_libdir}/libt1*.so.%{lib_major}*
 
 %files -n %{lib_name}-devel
 %defattr(-,root,root)
