@@ -1,7 +1,7 @@
 %define name	t1lib
-%define version	5.1.1
-%define release %mkrel 2
-%define lib_major 5
+%define version	5.1.2
+%define release %mkrel 1
+%define lib_major 1
 %define lib_name %mklibname %{name} %{lib_major}
 
 Summary:	Type 1 font rasterizer
@@ -9,17 +9,19 @@ Name:		%{name}
 Version:	%{version}
 Release:	%{release}
 URL:		ftp://sunsite.unc.edu/pub/Linux/libs/graphics/
-Source:		ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.bz2
+Source:		ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
 Patch1:		%{name}-doc.patch
 Patch2:         %{name}-config.patch
 # http://qa.mandriva.com/show_bug.cgi?id=34223
-Patch3:         t1lib-5.1.0-ub-CVE-2007-4033.patch
+Patch3:         t1lib-5.1.2-ub-CVE-2007-4033.patch
+Patch4:		t1lib-5.1.2-lib-cleanup.patch
+Patch5:		t1lib-5.1.2-segf.patch
 Group:		System/Libraries
 BuildRequires:	X11-devel xpm-devel
 BuildRequires:  tetex
 BuildRequires:  tetex-latex
-License:	LGPL
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%(id -u -n)
+License:	LGPLv2+
+BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 Epoch: 		1
 
 %description
@@ -96,6 +98,8 @@ The t1lib-config contains configuration files for t1lib library
 %patch1 -p0
 %patch2 -p0
 %patch3 -p1 -b .CVE-2007-4033
+%patch4 -p1 -b .lib-cleanup
+%patch5 -p1 -b .fix-segfault
 
 %build
 %configure2_5x
@@ -137,17 +141,15 @@ rm -rf %buildroot
 
 %files -n %{lib_name}-static-devel
 %defattr(-,root,root)
-%doc LGPL
 %{_libdir}/*.a
 
 %files -n %{name}-progs
 %defattr(-,root,root)
-%doc LICENSE README.t1python
+%doc README.t1python
 %attr(755,root,root) %{_bindir}/*
 
 %files -n %{name}-config
 %defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/t1lib/t1lib.config
-%doc LGPL
 
 
