@@ -1,6 +1,6 @@
 %define name	t1lib
 %define version	5.1.2
-%define release %mkrel 2
+%define release %mkrel 3
 %define lib_major 5
 %define lib_name %mklibname %{name} %{lib_major}
 
