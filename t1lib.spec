@@ -1,8 +1,10 @@
 %define name	t1lib
 %define version	5.1.2
-%define release %mkrel 3
+%define release %mkrel 4
 %define lib_major 5
 %define lib_name %mklibname %{name} %{lib_major}
+%define develname %mklibname -d %name
+%define sdevelname %mklibname -d -s %name
 
 Summary:	Type 1 font rasterizer
 Name:		%{name}
@@ -34,9 +36,9 @@ also includes a support for antialiasing.
 %package -n %{lib_name}
 Summary: 	Type 1 font rasterizer
 Group: 		System/Libraries
-Obsoletes: 	%{name}
-Provides: 	%{name}
-Obsoletes:	%{name}1
+Obsoletes: 	%{name} < %version-%release
+Provides: 	%{name} = %version-%release
+Obsoletes:	%{mklibname name 1}
 Provides:	%{name}1 = %version-%release
 Provides:	lib%{name} = %version-%release
 Requires:	%{name}-config
@@ -48,30 +50,32 @@ rasterizer donated by IBM to the X11-project. But some disadvantages
 of the rasterizer being included in X11 have been eliminated.  T1lib
 also includes a support for antialiasing.
 
-
-%package -n %{lib_name}-devel
+%package -n %{develname}
 Summary: 	Header files for Type 1 font rasterizer
 Group: 		Development/C
 Requires: 	%{lib_name} = %{epoch}:%{version}-%{release}
 Obsoletes: 	%{name}-devel
 Provides: 	%{name}-devel = %{version}-%{release}
-Obsoletes:	%{name}1-devel
+Obsoletes:	%{mklibname -d t1lib 1}
+Obsoletes:	%{mklibname -d t1lib 5}
 Provides:	%{name}1-devel = %{version}-%{release}
 Provides:	lib%{name}-devel = %{version}-%{release}
 
-%description -n %{lib_name}-devel 
+%description -n %{develname} 
 Header files required for compiling packages needing the t1lib.
 
-%package -n %{lib_name}-static-devel
+%package -n %{sdevelname}
 Summary:        Static libraries for Type 1 font rasterizer
 Group:          Development/C
-Requires:       %{lib_name}-devel = %{epoch}:%{version}-%{release}
+Requires:       %{develname} = %{epoch}:%{version}-%{release}
 Provides:       %{name}-static-devel = %{version}-%{release}
 Obsoletes:	%{name}1-static-devel
+Obsoletes:      %{mklibname -s -d t1lib 1}
+Obsoletes:      %{mklibname -s -d t1lib 5}
 Provides:	%{name}1-static-devel = %{version}-%{release}
 Provides:	lib%{name}-static-devel = %{version}-%{release}
 
-%description -n %{lib_name}-static-devel
+%description -n %{sdevelname}
 Static libraries required for staticaly compiling packages needing the
 t1lib.
 
@@ -136,14 +140,14 @@ rm -rf %buildroot
 %doc Changes LGPL README.t1*
 %attr(755,root,root) %{_libdir}/libt1*.so.%{lib_major}*
 
-%files -n %{lib_name}-devel
+%files -n %{develname}
 %defattr(-,root,root)
-%doc LGPL doc/t1lib_doc.pdf
+%doc doc/t1lib_doc.pdf
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/*.la
 
-%files -n %{lib_name}-static-devel
+%files -n %{sdevelname}
 %defattr(-,root,root)
 %{_libdir}/*.a
 
@@ -155,5 +159,3 @@ rm -rf %buildroot
 %files -n %{name}-config
 %defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/t1lib/t1lib.config
-
-
