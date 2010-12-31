@@ -18,7 +18,9 @@ Patch3:         t1lib-5.1.2-ub-CVE-2007-4033.patch
 Patch4:		t1lib-5.1.2-lib-cleanup.patch
 Patch5:		t1lib-5.1.2-segf.patch
 Patch6:		t1lib-5.1.2-format_not_a_string_literal_and_no_format_arguments.diff
-BuildRequires:	X11-devel xpm-devel
+BuildRequires:	libx11-devel
+BuildRequires:	libxaw-devel
+BuildRequires:	libxt-devel
 BuildRequires:  tetex
 BuildRequires:  tetex-latex
 Epoch: 		1
