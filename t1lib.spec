@@ -6,7 +6,7 @@
 Summary:	Type 1 font rasterizer
 Name:		t1lib
 Version:	5.1.2
-Release:	%mkrel 9
+Release:	%mkrel 10
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		ftp://sunsite.unc.edu/pub/Linux/libs/graphics/
@@ -18,6 +18,7 @@ Patch3:         t1lib-5.1.2-ub-CVE-2007-4033.patch
 Patch4:		t1lib-5.1.2-lib-cleanup.patch
 Patch5:		t1lib-5.1.2-segf.patch
 Patch6:		t1lib-5.1.2-format_not_a_string_literal_and_no_format_arguments.diff
+Patch7:		t1lib-5.1.2-CVE-2010-XXX.diff
 BuildRequires:	libx11-devel
 BuildRequires:	libxaw-devel
 BuildRequires:	libxt-devel
@@ -105,6 +106,7 @@ The t1lib-config contains configuration files for t1lib library
 %patch4 -p1 -b .lib-cleanup
 %patch5 -p1 -b .fix-segfault
 %patch6 -p1 -b .format_not_a_string_literal_and_no_format_arguments
+%patch7 -p0 -b .CVE-2010-XXX
 
 %build
 %configure2_5x
