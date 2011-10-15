@@ -13,8 +13,6 @@ URL:		ftp://sunsite.unc.edu/pub/Linux/libs/graphics/
 Source:		ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
 Patch1:		%{name}-doc.patch
 Patch2:         %{name}-config.patch
-# http://qa.mandriva.com/show_bug.cgi?id=34223
-Patch3:         t1lib-5.1.2-ub-CVE-2007-4033.patch
 Patch4:		t1lib-5.1.2-lib-cleanup.patch
 Patch5:		t1lib-5.1.2-segf.patch
 Patch6:		t1lib-5.1.2-format_not_a_string_literal_and_no_format_arguments.diff
@@ -102,7 +100,6 @@ The t1lib-config contains configuration files for t1lib library
 %setup -q
 %patch1 -p0
 %patch2 -p0
-%patch3 -p1 -b .CVE-2007-4033
 %patch4 -p1 -b .lib-cleanup
 %patch5 -p1 -b .fix-segfault
 %patch6 -p1 -b .format_not_a_string_literal_and_no_format_arguments
