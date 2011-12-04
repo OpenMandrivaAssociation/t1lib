@@ -92,9 +92,6 @@ The t1lib-config contains configuration files for t1lib library
 %configure2_5x
 perl -pi -e 's,-DGLOBAL_CONFIG_DIR="\\"/usr/share/t1lib\\"",-DGLOBAL_CONFIG_DIR="\\"/etc/t1lib\\"",;' Makefile
 make without_doc
-(cd doc
-make clean
-make pdf)
 
 %install
 rm -rf %buildroot
