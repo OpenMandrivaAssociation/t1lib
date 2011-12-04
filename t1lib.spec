@@ -1,12 +1,11 @@
 %define major 5
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname -d %name
-%define sdevelname %mklibname -d -s %name
 
 Summary:	Type 1 font rasterizer
 Name:		t1lib
 Version:	5.1.2
-Release:	%mkrel 11
+Release:	12
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		ftp://sunsite.unc.edu/pub/Linux/libs/graphics/
@@ -23,7 +22,6 @@ BuildRequires:	libxt-devel
 BuildRequires:  tetex
 BuildRequires:  tetex-latex
 Epoch: 		1
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 T1lib is a library for generating character and string-glyphs from
@@ -52,7 +50,7 @@ also includes a support for antialiasing.
 %package -n %{develname}
 Summary: 	Header files for Type 1 font rasterizer
 Group: 		Development/C
-Requires: 	%{libname} = %{epoch}:%{version}-%{release}
+Requires: 	%{libname} >= %{epoch}:%{version}-%{release}
 Obsoletes: 	%{name}-devel
 Provides: 	%{name}-devel = %{version}-%{release}
 Obsoletes:	%{mklibname -d t1lib 1}
@@ -62,21 +60,6 @@ Provides:	lib%{name}-devel = %{version}-%{release}
 
 %description -n %{develname} 
 Header files required for compiling packages needing the t1lib.
-
-%package -n %{sdevelname}
-Summary:        Static libraries for Type 1 font rasterizer
-Group:          Development/C
-Requires:       %{develname} = %{epoch}:%{version}-%{release}
-Provides:       %{name}-static-devel = %{version}-%{release}
-Obsoletes:	%{name}1-static-devel
-Obsoletes:      %{mklibname -s -d t1lib 1}
-Obsoletes:      %{mklibname -s -d t1lib 5}
-Provides:	%{name}1-static-devel = %{version}-%{release}
-Provides:	lib%{name}-static-devel = %{version}-%{release}
-
-%description -n %{sdevelname}
-Static libraries required for staticaly compiling packages needing the
-t1lib.
 
 %package -n %{name}-progs
 Summary: 	Programs dor manipulating Type 1 font
@@ -125,38 +108,22 @@ mv %buildroot/%{_datadir}/t1lib/t1lib.config %buildroot/%{_sysconfdir}/t1lib
 ln -sf libt1.so libt1.so.0)
 %endif
 
-%if %mdkversion < 200900
-%post 	-n %{libname} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
-%clean
-rm -rf %buildroot
+# cleanup
+rm -rf %{buildroot}%{_libdir}/*.*a
 
 %files -n %{libname}
-%defattr(-,root,root)
 %dir %{_sysconfdir}/t1lib
 %doc Changes LGPL README.t1*
 %attr(0755,root,root) %{_libdir}/libt1*.so.%{major}*
 
 %files -n %{develname}
-%defattr(-,root,root)
 %doc doc/t1lib_doc.pdf
 %{_includedir}/*
 %{_libdir}/*.so
-%{_libdir}/*.la
-
-%files -n %{sdevelname}
-%defattr(-,root,root)
-%{_libdir}/*.a
 
 %files -n %{name}-progs
-%defattr(-,root,root)
 %doc README.t1python
 %attr(0755,root,root) %{_bindir}/*
 
 %files -n %{name}-config
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/t1lib/t1lib.config
