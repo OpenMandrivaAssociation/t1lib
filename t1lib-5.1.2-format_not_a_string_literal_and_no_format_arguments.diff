@@ -1,0 +1,24 @@
+diff -Naurp t1lib-5.1.2/lib/t1lib/t1subset.c t1lib-5.1.2.oden/lib/t1lib/t1subset.c
+--- t1lib-5.1.2/lib/t1lib/t1subset.c	2007-12-23 16:49:42.000000000 +0100
++++ t1lib-5.1.2.oden/lib/t1lib/t1subset.c	2008-12-22 17:44:33.000000000 +0100
+@@ -759,7 +759,7 @@ char *T1_SubsetFont( int FontID,
+ 	     tr_len);
+     T1_PrintLog( "T1_SubsetFont()", err_warn_msg_buf,
+ 		 T1LOG_DEBUG);
+-    l+=sprintf( &(trailerbuf[l]), linebuf); /* contains the PostScript trailer */
++    l+=sprintf( &(trailerbuf[l]), "%s", linebuf); /* contains the PostScript trailer */
+   }
+   
+   /* compute size of output file */
+diff -Naurp t1lib-5.1.2/lib/type1/objects.c t1lib-5.1.2.oden/lib/type1/objects.c
+--- t1lib-5.1.2/lib/type1/objects.c	2007-12-23 16:49:42.000000000 +0100
++++ t1lib-5.1.2.oden/lib/type1/objects.c	2008-12-22 17:41:26.000000000 +0100
+@@ -957,7 +957,7 @@ struct xobject *TypeErr(name, obj, expec
+  
+        sprintf(typemsg, "Wrong object type in %s; expected %s, found %s.\n",
+                   name, TypeFmt(expect), TypeFmt(obj->type));
+-       IfTrace0(TRUE,typemsg);
++       IfTrace0(TRUE,"typemsg");
+  
+        ObjectPostMortem(obj);
+  
