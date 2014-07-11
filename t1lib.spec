@@ -5,7 +5,7 @@
 Summary:	Type 1 font rasterizer
 Name:		t1lib
 Version:	5.1.2
-Release:	20
+Release:	21
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		ftp://sunsite.unc.edu/pub/Linux/libs/graphics/
