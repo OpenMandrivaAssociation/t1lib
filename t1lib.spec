@@ -1,6 +1,7 @@
 %define major 5
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname -d %name
+%define _disable_lto 1
 
 Summary:	Type 1 font rasterizer
 Name:		t1lib
