@@ -6,7 +6,7 @@
 Summary:	Type 1 font rasterizer
 Name:		t1lib
 Version:	5.1.2
-Release:	25
+Release:	26
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		ftp://sunsite.unc.edu/pub/Linux/libs/graphics/
@@ -18,13 +18,10 @@ Patch5:		t1lib-5.1.2-segf.patch
 Patch6:		t1lib-5.1.2-format_not_a_string_literal_and_no_format_arguments.diff
 Patch7:		t1lib-5.1.2-CVE-2010-2642,CVE-2011-0433.diff
 Patch8:		t1lib-5.1.2-CVE-2011-0764,1552,1553,1554.diff
-Patch9:		t1lib-aarch64.patch
 Patch10:	configure.patch
 BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(xaw7)
 BuildRequires:	pkgconfig(xt)
-BuildRequires:  tetex
-BuildRequires:  tetex-latex
 Epoch: 		1
 
 %description
@@ -86,12 +83,11 @@ The t1lib-config contains configuration files for t1lib library
 %patch6 -p1 -b .format_not_a_string_literal_and_no_format_arguments
 %patch7 -p1 -b .CVE-2010-2642,CVE-2011-0433
 %patch8 -p1 -b .CVE-2011-0764,1552,1553,1554
-%patch9 -p1 -b .aarch64
 %patch10 -p1 -b .configure
 
 %build
 export ac_64bit_type="long"
-%configure2_5x
+%configure
 perl -pi -e 's,-DGLOBAL_CONFIG_DIR="\\"/usr/share/t1lib\\"",-DGLOBAL_CONFIG_DIR="\\"/etc/t1lib\\"",;' Makefile
 make without_doc
 
