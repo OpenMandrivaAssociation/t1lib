@@ -19,6 +19,11 @@ Patch6:		t1lib-5.1.2-format_not_a_string_literal_and_no_format_arguments.diff
 Patch7:		t1lib-5.1.2-CVE-2010-2642,CVE-2011-0433.diff
 Patch8:		t1lib-5.1.2-CVE-2011-0764,1552,1553,1554.diff
 Patch10:	configure.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(xaw7)
 BuildRequires:	pkgconfig(xt)
